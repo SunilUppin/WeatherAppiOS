@@ -34,23 +34,35 @@
                             <constraint firstAttribute="height" constant="20" id="Ljh-yz-GQa"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nN-rW-fmB">
+                        <rect key="frame" x="0.0" y="94" width="414" height="1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="i2J-kl-LfI"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="z4j-HE-6IR" firstAttribute="top" secondItem="PUa-U4-FGT" secondAttribute="top" constant="5" id="1f4-SB-hSk"/>
                     <constraint firstItem="fYc-En-aP7" firstAttribute="centerX" secondItem="PUa-U4-FGT" secondAttribute="centerX" id="4cQ-WE-clY"/>
                     <constraint firstItem="z4j-HE-6IR" firstAttribute="leading" secondItem="PUa-U4-FGT" secondAttribute="leading" constant="16" id="B0L-PY-FHH"/>
+                    <constraint firstItem="1nN-rW-fmB" firstAttribute="leading" secondItem="PUa-U4-FGT" secondAttribute="leading" id="NEq-cB-68F"/>
                     <constraint firstItem="Gg0-II-djJ" firstAttribute="leading" secondItem="fYc-En-aP7" secondAttribute="trailing" constant="10" id="SzL-Za-NDE"/>
                     <constraint firstItem="Gg0-II-djJ" firstAttribute="top" secondItem="PUa-U4-FGT" secondAttribute="top" constant="5" id="baf-Um-Ul2"/>
+                    <constraint firstAttribute="trailing" secondItem="1nN-rW-fmB" secondAttribute="trailing" id="gBi-iD-HRP"/>
                     <constraint firstAttribute="bottom" secondItem="Gg0-II-djJ" secondAttribute="bottom" constant="5" id="hYQ-Th-91s"/>
                     <constraint firstAttribute="trailing" secondItem="Gg0-II-djJ" secondAttribute="trailing" constant="16" id="inR-vZ-oVo"/>
                     <constraint firstItem="fYc-En-aP7" firstAttribute="centerY" secondItem="PUa-U4-FGT" secondAttribute="centerY" id="mOm-01-7UV"/>
+                    <constraint firstAttribute="bottom" secondItem="1nN-rW-fmB" secondAttribute="bottom" id="pOV-WO-JLi"/>
                     <constraint firstItem="fYc-En-aP7" firstAttribute="leading" secondItem="z4j-HE-6IR" secondAttribute="trailing" constant="10" id="uPU-2c-I1J"/>
                     <constraint firstAttribute="bottom" secondItem="z4j-HE-6IR" secondAttribute="bottom" constant="5" id="v8P-LR-0WH"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="dayLabel" destination="z4j-HE-6IR" id="4l4-WZ-SmF"/>
                 <outlet property="imgView" destination="fYc-En-aP7" id="XmZ-ma-ozJ"/>
+                <outlet property="seperatorView" destination="1nN-rW-fmB" id="3Wy-t2-wG9"/>
                 <outlet property="tempLabel" destination="Gg0-II-djJ" id="8jK-t7-esc"/>
             </connections>
             <point key="canvasLocation" x="-165.21739130434784" y="31.808035714285712"/>

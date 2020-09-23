@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationNameCell" rowHeight="190" id="9ye-Ql-xQu" customClass="LocationNameCell" customModule="EnParadigmWeatherApp" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationNameCell" rowHeight="250" id="9ye-Ql-xQu" customClass="LocationNameCell" customModule="EnParadigmWeatherApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="190"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9ye-Ql-xQu" id="ob9-8k-Zta">
@@ -16,39 +16,49 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bengaluru" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wh3-YT-R24">
-                        <rect key="frame" x="16" y="25" width="382" height="24"/>
+                        <rect key="frame" x="16" y="10.5" width="382" height="24"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rainy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5m-LZ-UJG">
-                        <rect key="frame" x="16" y="59" width="382" height="17.5"/>
+                        <rect key="frame" x="16" y="44.5" width="382" height="17.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nez-kp-c3E">
-                        <rect key="frame" x="16" y="86.5" width="382" height="48"/>
+                        <rect key="frame" x="16" y="72" width="382" height="48"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="40"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qni-W2-9Ho">
+                        <rect key="frame" x="0.0" y="189" width="414" height="1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="9qX-Et-r6p"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Wh3-YT-R24" firstAttribute="top" secondItem="ob9-8k-Zta" secondAttribute="top" constant="25" id="9Wl-DB-YRh"/>
+                    <constraint firstAttribute="bottom" secondItem="Qni-W2-9Ho" secondAttribute="bottom" id="0U6-7u-Xpy"/>
+                    <constraint firstAttribute="bottom" secondItem="nez-kp-c3E" secondAttribute="bottom" constant="70" id="8d4-D1-wcm"/>
                     <constraint firstItem="Y5m-LZ-UJG" firstAttribute="top" secondItem="Wh3-YT-R24" secondAttribute="bottom" constant="10" id="LTj-2p-8k9"/>
                     <constraint firstItem="Y5m-LZ-UJG" firstAttribute="trailing" secondItem="Wh3-YT-R24" secondAttribute="trailing" id="RpG-jJ-OyT"/>
+                    <constraint firstItem="Qni-W2-9Ho" firstAttribute="leading" secondItem="ob9-8k-Zta" secondAttribute="leading" id="Uae-Jx-icD"/>
                     <constraint firstItem="nez-kp-c3E" firstAttribute="top" secondItem="Y5m-LZ-UJG" secondAttribute="bottom" constant="10" id="XSB-ic-94i"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nez-kp-c3E" secondAttribute="bottom" constant="10" id="exy-xZ-oFg"/>
                     <constraint firstItem="Y5m-LZ-UJG" firstAttribute="leading" secondItem="Wh3-YT-R24" secondAttribute="leading" id="fej-yN-DAa"/>
                     <constraint firstItem="Wh3-YT-R24" firstAttribute="leading" secondItem="ob9-8k-Zta" secondAttribute="leading" constant="16" id="gVa-VD-yiK"/>
                     <constraint firstItem="nez-kp-c3E" firstAttribute="trailing" secondItem="Wh3-YT-R24" secondAttribute="trailing" id="kzI-gk-bOp"/>
                     <constraint firstItem="nez-kp-c3E" firstAttribute="leading" secondItem="Wh3-YT-R24" secondAttribute="leading" id="m38-Zc-wBf"/>
                     <constraint firstAttribute="trailing" secondItem="Wh3-YT-R24" secondAttribute="trailing" constant="16" id="vhI-IC-tSG"/>
+                    <constraint firstAttribute="trailing" secondItem="Qni-W2-9Ho" secondAttribute="trailing" id="zDI-JX-0uP"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="locationNameLabel" destination="Wh3-YT-R24" id="4dp-Y4-Y4T"/>
                 <outlet property="temperatureLabel" destination="nez-kp-c3E" id="lfB-Jy-nz0"/>

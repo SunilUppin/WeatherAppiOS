@@ -15,8 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vGZ-4F-5Sg">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vGZ-4F-5Sg">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="RvL-As-NHN" id="1mt-by-cNe"/>
@@ -27,8 +27,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="vGZ-4F-5Sg" firstAttribute="leading" secondItem="9uf-GF-DA3" secondAttribute="leading" id="MIk-vR-afk"/>
-                            <constraint firstItem="vGZ-4F-5Sg" firstAttribute="top" secondItem="9uf-GF-DA3" secondAttribute="top" id="Mpo-3b-K4g"/>
-                            <constraint firstItem="9uf-GF-DA3" firstAttribute="bottom" secondItem="vGZ-4F-5Sg" secondAttribute="bottom" id="Xjq-3I-zcw"/>
+                            <constraint firstItem="vGZ-4F-5Sg" firstAttribute="top" secondItem="9uf-GF-DA3" secondAttribute="top" constant="-44" id="Mpo-3b-K4g"/>
+                            <constraint firstItem="9uf-GF-DA3" firstAttribute="bottom" secondItem="vGZ-4F-5Sg" secondAttribute="bottom" constant="-34" id="Xjq-3I-zcw"/>
                             <constraint firstItem="9uf-GF-DA3" firstAttribute="trailing" secondItem="vGZ-4F-5Sg" secondAttribute="trailing" id="vda-O6-WP5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9uf-GF-DA3"/>
@@ -39,7 +39,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QLe-Zz-Dvk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-33" y="74"/>
+            <point key="canvasLocation" x="-33.333333333333336" y="73.660714285714278"/>
         </scene>
     </scenes>
 </document>

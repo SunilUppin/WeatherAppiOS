@@ -13,5 +13,6 @@ class NextDaysWeatherInfoCell: UITableViewCell {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var seperatorView: UIView!
     
 }
