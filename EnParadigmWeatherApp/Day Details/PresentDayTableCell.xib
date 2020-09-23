@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PresentDayTableCell" rowHeight="88" id="aO9-JF-VH0" customClass="PresentDayTableCell" customModule="EnParadigmWeatherApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aO9-JF-VH0" id="7Fx-Wu-4ro">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TODAY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urw-kp-UQB">
+                        <rect key="frame" x="16" y="9" width="46" height="16.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWt-Ah-ng3">
+                        <rect key="frame" x="0.0" y="29.5" width="414" height="1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="t4H-71-6JY"/>
+                        </constraints>
+                    </view>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XXb-Bc-BUJ">
+                        <rect key="frame" x="0.0" y="30.5" width="414" height="56.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JJd-qr-0XF">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Lq-Hm-TtT">
+                        <rect key="frame" x="0.0" y="87" width="414" height="1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="6xS-Cb-TDe"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="9Lq-Hm-TtT" secondAttribute="bottom" id="1cU-fC-ShW"/>
+                    <constraint firstAttribute="trailing" secondItem="9Lq-Hm-TtT" secondAttribute="trailing" id="9EX-uW-neX"/>
+                    <constraint firstItem="Urw-kp-UQB" firstAttribute="leading" secondItem="7Fx-Wu-4ro" secondAttribute="leading" constant="16" id="BEu-cS-Y2N"/>
+                    <constraint firstItem="NWt-Ah-ng3" firstAttribute="leading" secondItem="7Fx-Wu-4ro" secondAttribute="leading" id="CPL-Nd-lBY"/>
+                    <constraint firstItem="9Lq-Hm-TtT" firstAttribute="leading" secondItem="7Fx-Wu-4ro" secondAttribute="leading" id="HfD-A3-lwx"/>
+                    <constraint firstItem="XXb-Bc-BUJ" firstAttribute="top" secondItem="NWt-Ah-ng3" secondAttribute="bottom" id="RgM-hi-1tr"/>
+                    <constraint firstItem="XXb-Bc-BUJ" firstAttribute="leading" secondItem="7Fx-Wu-4ro" secondAttribute="leading" id="SpW-F9-HIz"/>
+                    <constraint firstItem="NWt-Ah-ng3" firstAttribute="top" secondItem="Urw-kp-UQB" secondAttribute="bottom" constant="4" id="e5w-cQ-cgu"/>
+                    <constraint firstAttribute="trailing" secondItem="NWt-Ah-ng3" secondAttribute="trailing" id="gGU-VX-uMK"/>
+                    <constraint firstItem="Urw-kp-UQB" firstAttribute="top" secondItem="7Fx-Wu-4ro" secondAttribute="top" constant="9" id="k31-wt-Z3A"/>
+                    <constraint firstAttribute="trailing" secondItem="XXb-Bc-BUJ" secondAttribute="trailing" id="ljI-q2-AJw"/>
+                    <constraint firstItem="9Lq-Hm-TtT" firstAttribute="top" secondItem="XXb-Bc-BUJ" secondAttribute="bottom" id="r27-Z4-hwt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="collectionView" destination="XXb-Bc-BUJ" id="ElX-48-y8N"/>
+            </connections>
+            <point key="canvasLocation" x="53.623188405797109" y="70.3125"/>
+        </tableViewCell>
+    </objects>
+</document>
