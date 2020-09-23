@@ -43,6 +43,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Qni-W2-9Ho" secondAttribute="bottom" id="0U6-7u-Xpy"/>
                     <constraint firstAttribute="bottom" secondItem="nez-kp-c3E" secondAttribute="bottom" constant="70" id="8d4-D1-wcm"/>

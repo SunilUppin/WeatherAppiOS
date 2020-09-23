@@ -28,6 +28,7 @@ extension PresentDayTableCell: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyDetailsCell", for: indexPath) as! HourlyDetailsCell
+        cell.layer.backgroundColor = UIColor.clear.cgColor
         cell.timeLabel.text = viewModel?.hourlyArray[indexPath.row]
         cell.temperatureLabel.text = viewModel?.hourlyTempArray[indexPath.row]
         if (viewModel?.hourlyImageData[indexPath.row].contains("cloud"))! {

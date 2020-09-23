@@ -35,7 +35,7 @@ struct Coord: Codable {
 }
 
 // MARK: - List
-struct List: Codable {
+class List: NSObject, Codable {
     let dt: Int?
     let main: MainClass?
     let weather: [Weather]?

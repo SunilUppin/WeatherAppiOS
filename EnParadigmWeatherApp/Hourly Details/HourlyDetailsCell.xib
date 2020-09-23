@@ -25,7 +25,7 @@
                                     <constraint firstAttribute="height" constant="25" id="e1D-Po-3qs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E4p-v8-j4P">
@@ -41,12 +41,13 @@
                                     <constraint firstAttribute="height" constant="25" id="Kl1-j8-Jbd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="2GL-fh-v2m" secondAttribute="trailing" constant="5" id="7Aj-bf-6Dv"/>
                     <constraint firstItem="2GL-fh-v2m" firstAttribute="leading" secondItem="OnD-la-zWk" secondAttribute="leading" constant="5" id="Hyc-rc-HkH"/>

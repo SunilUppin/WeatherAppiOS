@@ -10,6 +10,8 @@
 	<string>Application wants to use your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Application wants to use your location</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class WeatherViewModel {
     
@@ -24,9 +25,15 @@ class WeatherViewModel {
     var hourlyTempArray: [String] = []
     var hourlyImageData: [String] = []
     
+    var cityObj: City?
+    
+    var cityArray: [String] = []
+    var cityTempArray: [String] = []
+    var cityName = ""
+    
     func getWeatherDetails(cityName: String, _ completion: @escaping (_ e: NSError?) -> Void) {
         
-        var request = URLRequest(url: URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=bengaluru&appid=\(appId)")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=\(cityName)&appid=\(appId)")!,timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
         
         let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
@@ -42,6 +49,9 @@ class WeatherViewModel {
                 print("===ERROR===")
                 return
             }
+            
+            self.deleteObject()
+            
             do {
                 if let det = try? JSONDecoder().decode(Details.self, from: jsonData) {
                     print(det)
@@ -51,23 +61,28 @@ class WeatherViewModel {
                     for i in 0..<det.list.count {
                         if i == 0 {
                             curDate = det.list[i].dtTxt?.components(separatedBy: " ").first ?? ""
-                            
+                            self.cityTempArray.append("\(det.list[i].main?.temp ?? 0.0)")
                         } else {
                             if !(det.list[i].dtTxt?.contains(curDate) ?? false) {
                                 curDate = det.list[i].dtTxt?.components(separatedBy: " ").first ?? ""
-                                tempArray.append(curDate )
+                                tempArray.append(curDate)
                             }
                         }
                     }
                     
+                    self.cityArray.append(det.city?.name ?? "")
                     self.daysToDisplay = tempArray
                     self.daysArray = det.list
+                    self.cityObj = det.city
+                    self.saveToDB(arr: self.daysArray, city: self.cityObj)
+                    
                     self.getNextDaysTemperature()
                     self.getImageSet()
                     self.getHourlyDataForToday()
                     completion(nil)
                 } else {
                     print("No location found")
+                    self.noLocFound = true
                     completion(nil)
                 }
             } catch {
@@ -77,63 +92,15 @@ class WeatherViewModel {
         task.resume()
     }
     
-    //    import Foundation
-    
-    
-//    func getData() {
-//        var semaphore = DispatchSemaphore (value: 0)
-//
-//        var request = URLRequest(url: URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=bengaluru&appid=7b1b2ec6a4439c294a72c98905d6769c")!,timeoutInterval: Double.infinity)
-//        request.httpMethod = "GET"
-//
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let data = data else {
-//                print(String(describing: error))
-//                return
-//            }
-//            let temp = String(data: data, encoding: .utf8)!
-//            do {
-//                let det = try JSONDecoder().decode(Details.self, from: data)
-//                print(det)
-//            } catch {
-//
-//            }
-//
-//            print(temp)
-//            semaphore.signal()
-//        }
-//
-//        task.resume()
-//        semaphore.wait()
-//    }
-    
     func measureConverter(temperatute: Double) -> String {
-//        let temperatute = daysArray?[0].main?.temp ?? 0.0
         let measureFormatter = MeasurementFormatter()
         let measurement = Measurement(value: temperatute - 273.15, unit: UnitTemperature.celsius)
         let output = measureFormatter.string(from: measurement)
         return output
     }
     
-//    func convertStringDateToDays(strDate: String){
-//
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd" //Your date format
-//        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00") //Current time zone
-//        //according to date format your date string
-//        guard let date = dateFormatter.date(from: strDate) else {
-//            fatalError()
-//        }
-//        print(date)
-//
-////        let formatter  = DateFormatter()
-////        formatter.dateFormat = "yyyy-MM-dd"
-//        guard let todayDate = dateFormatter.date(from: strDate) else { return }
-//        let myCalendar = Calendar(identifier: .gregorian)
-//        let weekDay = myCalendar.component(.weekday, from: todayDate)
-//    }
-    
     func getNextDaysTemperature() {
+        self.nextDaysTemperatureArray = []
         var flag = false
         for str in daysToDisplay! {
             flag = true
@@ -151,6 +118,7 @@ class WeatherViewModel {
     }
     
     func getImageSet() {
+        self.weatherArray = []
         var flag = false
         for str in daysToDisplay! {
             flag = true
@@ -166,6 +134,9 @@ class WeatherViewModel {
     }
     
     func getHourlyDataForToday() {
+        self.hourlyArray = []
+        self.hourlyImageData = []
+        self.hourlyTempArray = []
         let count = daysArray?.count ?? 0
         let todaysDate = daysArray?.first?.dtTxt?.components(separatedBy: " ").first ?? ""
         for i in 0..<count {
@@ -186,4 +157,105 @@ class WeatherViewModel {
             }
         }
     }
+    
+    
+//    private func createHourlyEntityFrom(hourlyArr: [String], hourlyTempArr: [String]) {
+//
+//        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+//        let hourlyEntity = NSEntityDescription.insertNewObject(forEntityName: "HourlyData", into: context) as? HourlyData
+//
+//        if hourlyArr.count == hourlyTempArr.count {
+//            do {
+//                let horlyData = try? NSKeyedArchiver.archivedData(withRootObject: hourlyArr, requiringSecureCoding: false)
+//                hourlyEntity?.setValue(horlyData, forKey: "timeValue")
+//                try context.save()
+//            } catch let error {
+//                print(error)
+//            }
+//        }
+//    }
+    
+    func saveToDB(arr: [List]?, city: City?) {
+        do {
+            guard let list = arr, let cityObj = city else {
+                return
+            }
+            let data1 = try PropertyListEncoder().encode(list)
+            let locationEntity = Location.createEntity(cityId: "\(cityObj.id)")
+            locationEntity?.locationName = cityObj.name
+            locationEntity?.locationId = "\(cityObj.id)"
+            locationEntity?.weatherInfo = data1 as NSObject?
+            
+            let moc = CoreDataStack.sharedInstance.persistentContainer.viewContext
+            try moc.save()
+            
+        } catch {
+            
+        }
+    }
+    
+    func fetchFromDB(index: Int? = nil) {
+        
+        let city = Location.fetchCity()
+            
+        let tmp = city?[index ?? 0]
+        self.cityName = tmp?.locationName ?? ""
+        do {
+            let res = try PropertyListDecoder().decode(Array<List>.self, from: tmp?.weatherInfo as! Data)
+            
+            getNextSetOfDays(arr: res)
+            print(res)
+        } catch {
+            print("Error fetching")
+        }
+        print(city as Any)
+    }
+    
+    func getNextSetOfDays(arr: [List]) {
+        self.daysArray = arr
+        var tempArray : [String] = []
+        var curDate = ""
+        for i in 0..<arr.count {
+            if i == 0 {
+                curDate = arr[i].dtTxt?.components(separatedBy: " ").first ?? ""
+                self.cityTempArray.append("\(arr[i].main?.temp ?? 0.0)")
+            } else {
+                if !(arr[i].dtTxt?.contains(curDate) ?? false) {
+                    curDate = arr[i].dtTxt?.components(separatedBy: " ").first ?? ""
+                    tempArray.append(curDate)
+                }
+            }
+        }
+        self.daysToDisplay = tempArray
+        self.getNextDaysTemperature()
+        self.getHourlyDataForToday()
+        self.getImageSet()
+    }
+    
+    
+    func deleteObject() {
+        do {
+            let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+            let items = try context.fetch(fetchRequest) as! [NSManagedObject]
+
+            for item in items {
+                context.delete(item)
+            }
+            try context.save()
+        } catch {
+            
+        }
+    }
+    
+    func dateFormatter(strDate: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: strDate)
+
+        dateFormatter.dateFormat = "dd-MMM-yyyy"
+        return dateFormatter.string(from: date!)
+    }
 }
+
+

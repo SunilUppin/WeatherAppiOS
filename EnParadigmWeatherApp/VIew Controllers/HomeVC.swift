@@ -8,6 +8,10 @@
 
 import UIKit
 import CoreLocation
+import Reachability
+import Network
+
+let reachability = try! Reachability()
 
 class HomeVC: UIViewController, CLLocationManagerDelegate {
 
@@ -23,16 +27,22 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundView = UIImageView(image: UIImage(named: "daytimeClear"))
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        tableView.isHidden = true
         registerNibs()
         tableView.tableFooterView = UIView()
-        
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func registerNibs() {
@@ -60,7 +70,33 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func checkNetwork() {
+
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                print("Reachable via WiFi")
+            } else {
+                print("Reachable via Cellular")
+            }
+
+        }
+        reachability.whenUnreachable = { _ in
+            self.viewModel.fetchFromDB()
+            print("Not reachable")
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+            return
+        }
+
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+    }
+    
     func getCurrenrtLocation(lat: Double, long: Double) {
+        checkNetwork()
         let geoCoder = CLGeocoder()
         let location = CLLocation(latitude: lat, longitude: long)
 
@@ -80,6 +116,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
                             }
                         } else {
                             DispatchQueue.main.async {
+                                self.tableView.isHidden = false
                                 self.tableView.reloadData()
                             }
                         }
@@ -88,7 +125,6 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
             }
         })
     }
-
 }
 
 extension HomeVC: UITableViewDataSource, UITableViewDelegate {
@@ -121,12 +157,18 @@ extension HomeVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LocationNameCell", for: indexPath) as! LocationNameCell
             cell.layer.backgroundColor = UIColor.clear.cgColor
-            cell.locationNameLabel.text = viewModel.details?.city?.name
+            if viewModel.cityObj?.name != nil {
+                cell.locationNameLabel.text = viewModel.cityObj?.name
+            } else {
+                cell.locationNameLabel.text = viewModel.cityName
+            }
+            
             cell.weatherLabel.text = viewModel.daysArray?[indexPath.row].weather?[indexPath.row].weatherDescription
             cell.temperatureLabel.text = viewModel.measureConverter(temperatute: viewModel.daysArray?[indexPath.row].main?.temp ?? 0.0)
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PresentDayTableCell", for: indexPath) as! PresentDayTableCell
+            cell.layer.backgroundColor = UIColor.clear.cgColor
             cell.viewModel = self.viewModel
             cell.collectionView.reloadData()
             return cell
@@ -137,7 +179,10 @@ extension HomeVC: UITableViewDataSource, UITableViewDelegate {
             let index = indexPath.row - 2
             cell.seperatorView.isHidden = true
             cell.layer.backgroundColor = UIColor.clear.cgColor
-            cell.dayLabel.text = viewModel.daysToDisplay?[index]
+            
+            let stringDate = viewModel.daysToDisplay?[index] ?? ""
+            
+            cell.dayLabel.text = viewModel.dateFormatter(strDate: stringDate)
             cell.tempLabel.text = viewModel.nextDaysTemperatureArray[index]
             if viewModel.weatherArray[index].lowercased().contains("clouds") {
                 cell.imgView?.image = UIImage(named: "dayCloudy")
@@ -177,6 +222,5 @@ extension HomeVC: UITableViewDataSource, UITableViewDelegate {
             }
             return  cell
         }
-        
     }
 }
